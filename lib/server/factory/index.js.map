@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/server/factory/index.ts"],"names":[],"mappings":";;AAAA,6BAA6B;AAGpB,kBAAG;AAFZ,mCAAmC;AAErB,wBAAM","sourcesContent":["import * as app from './app';\nimport * as server from './server';\n\nexport { app, server };\n"]}

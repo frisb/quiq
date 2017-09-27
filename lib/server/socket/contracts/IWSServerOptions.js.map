@@ -1,0 +1,1 @@
+{"version":3,"file":"IWSServerOptions.js","sourceRoot":"","sources":["../../../../src/server/socket/contracts/IWSServerOptions.ts"],"names":[],"mappings":"","sourcesContent":["import { IServerOptions } from 'ws';\nimport { ISigningOptions } from '../../contracts';\n\nexport interface IWSServerOptions extends IServerOptions {\n\tsigning?: ISigningOptions;\n}\n"]}

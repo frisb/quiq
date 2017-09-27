@@ -1,0 +1,1 @@
+{"version":3,"file":"IBaseTransportOptions.js","sourceRoot":"","sources":["../../../src/server/contracts/IBaseTransportOptions.ts"],"names":[],"mappings":"","sourcesContent":["export interface IBaseTransportOptions {\n\tprotocol: string;\n\taddress: string;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"IConnection.js","sourceRoot":"","sources":["../../../../src/server/socket/contracts/IConnection.ts"],"names":[],"mappings":"","sourcesContent":["import { ISession } from './ISession';\n\nexport interface IConnection {\n\tinit(session: ISession): void;\n\tclose(): void;\n\tonInit(): void;\n\tonClosed(): void;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"ISigningOptions.js","sourceRoot":"","sources":["../../../src/server/contracts/ISigningOptions.ts"],"names":[],"mappings":"","sourcesContent":["export interface ISigningOptions {\n\tsecret: string;\n\talgorithm: string;\n\texpirySeconds?: number;\n}\n"]}

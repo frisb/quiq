@@ -4,9 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/frisb/quiq/badges/gpa.svg)](https://codeclimate.com/github/frisb/quiq)
 [![npm version](https://badge.fury.io/js/quiq.svg)](http://badge.fury.io/js/quiq)
 
-quiq is a foundation for quick access to any 3rd party service module.
-
-Coming soon.
+quiq is a collection of simple controller based authoritative web & websocket servers and clients
 
 This module is still early alpha and work is in progress. All contributions are welcome.
 

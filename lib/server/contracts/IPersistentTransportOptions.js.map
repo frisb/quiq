@@ -1,0 +1,1 @@
+{"version":3,"file":"IPersistentTransportOptions.js","sourceRoot":"","sources":["../../../src/server/contracts/IPersistentTransportOptions.ts"],"names":[],"mappings":"","sourcesContent":["import { IBaseTransportOptions } from './IBaseTransportOptions';\n\nexport interface IPersistentTransportOptions extends IBaseTransportOptions {\n\tretryInterval: number;\n}\n"]}

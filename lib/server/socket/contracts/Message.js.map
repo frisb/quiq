@@ -1,0 +1,1 @@
+{"version":3,"file":"Message.js","sourceRoot":"","sources":["../../../../src/server/socket/contracts/Message.ts"],"names":[],"mappings":"","sourcesContent":["export type Message<T> = {\n\t[P in keyof T]: T[P];\n}\n"]}

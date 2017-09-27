@@ -1,0 +1,1 @@
+{"version":3,"file":"IGateway.js","sourceRoot":"","sources":["../../../../src/server/socket/contracts/IGateway.ts"],"names":[],"mappings":"","sourcesContent":["import { IConnection } from './IConnection';\n\nexport interface IGateway extends IConnection { }"]}

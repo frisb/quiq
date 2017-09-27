@@ -1,0 +1,1 @@
+{"version":3,"file":"IWrappedToken.js","sourceRoot":"","sources":["../../../../src/common/webclient/contracts/IWrappedToken.ts"],"names":[],"mappings":"","sourcesContent":["export interface IWrappedToken {\n\t[key: string]: any;\n\n\taccess_token: string;\n\ttoken_type: string;\n\texpires_in?: number;\n}\n"]}

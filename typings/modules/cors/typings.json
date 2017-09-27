@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/3cfb266458c7bc4d05625b436164915ed494dd64/cors/index.d.ts",
+    "raw": "registry:dt/cors#2.8.0+20170310225232",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/3cfb266458c7bc4d05625b436164915ed494dd64/cors/index.d.ts"
+  }
+}

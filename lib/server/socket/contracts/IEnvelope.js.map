@@ -1,0 +1,1 @@
+{"version":3,"file":"IEnvelope.js","sourceRoot":"","sources":["../../../../src/server/socket/contracts/IEnvelope.ts"],"names":[],"mappings":"","sourcesContent":["import { Message } from './Message';\n\nexport interface IEnvelope<T> {\n\t[envelopeType: string]: Message<T>;\n}\n"]}
