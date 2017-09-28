@@ -24,8 +24,6 @@ export function create(options: RoutingControllersOptions): express.Application 
 
 	const app = express();
 
-	app.set('views', `${ __dirname }/views`);
-	app.set('view engine', 'jade');
 	//app.set('port', port);
 	app.set('x-powered-by', false);
 	app.set('etag', false);
