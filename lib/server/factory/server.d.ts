@@ -1,3 +1,5 @@
+/// <reference types="express" />
+/// <reference types="node" />
 import * as http from 'http';
 import * as https from 'https';
 import { Application } from 'express';

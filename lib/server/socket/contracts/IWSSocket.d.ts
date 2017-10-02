@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { IncomingMessage } from 'http';
 import { Socket } from 'net';
 export interface IWSSocket extends Socket {

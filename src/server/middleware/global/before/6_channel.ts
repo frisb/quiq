@@ -19,6 +19,8 @@ export class Channel implements ExpressMiddlewareInterface {
 		let { method, url, headers, body } = req;
 		let { authorization } = headers;
 
+		authorization = <string> authorization;
+
 		let ID = generateID();
 		let ipv4 = process(req.ip).toString(); // x-forwarded-for ?
 

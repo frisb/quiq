@@ -1,3 +1,4 @@
+/// <reference types="express" />
 import 'reflect-metadata';
 import * as express from 'express';
 import { RoutingControllersOptions } from 'routing-controllers';

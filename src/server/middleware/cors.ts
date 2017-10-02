@@ -7,7 +7,7 @@ export class CORS implements ExpressMiddlewareInterface {
 		let { origin } = headers;
 
 		if (origin)
-			res.set('Access-Control-Allow-Origin', origin);
+			res.set('Access-Control-Allow-Origin', <string> origin);
 
 		if (method === 'OPTIONS') {
 			res.set({

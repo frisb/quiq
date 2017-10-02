@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { EventEmitter } from 'events';
 import { IConnection, ISession } from '../contracts';
 export declare abstract class AbstractConnection<TSession extends ISession> extends EventEmitter implements IConnection {

@@ -1,3 +1,5 @@
+/// <reference types="ws" />
+/// <reference types="node" />
 import * as WebSocket from 'ws';
 import { IncomingMessage } from 'http';
 import { Socket } from 'net';

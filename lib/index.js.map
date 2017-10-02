@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":";;AAAA,mCAAmC;AAE1B,wBAAM","sourcesContent":["import * as Server from './server';\n\nexport { Server }"]}
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../src/index.ts"],"names":[],"mappings":";;;;;AAAA,8BAAyB","sourcesContent":["export * from './server';\n"]}

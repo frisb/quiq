@@ -48,7 +48,7 @@ export class BaseTransport extends EventEmitter {
           reject(err);
         });
 
-        ws.on('message', (data) => {
+        ws.on('message', (data: string) => {
           let obj = JSON.parse(data);
           logger.debug('< Received', obj);
           this.emit('message', obj);
