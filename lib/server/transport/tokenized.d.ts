@@ -1,4 +1,4 @@
-import { PersistentTransport } from './Persistent';
+import { PersistentTransport } from './persistent';
 import { ITokenizedTransportOptions } from '../contracts';
 export declare class TokenizedTransport extends PersistentTransport {
     private tokenAddress;

@@ -1,4 +1,4 @@
-import { PersistentTransport }  from './Persistent';
+import { PersistentTransport }  from './persistent';
 import { AuthWebClient } from '../webclient';
 import { ITokenizedTransportOptions } from '../contracts';
 import { IWrappedToken, IAuthWebClient } from '../../common';
