@@ -29,3 +29,4 @@ export declare const WebClient: {
         request(options: IRequestOptions): Promise<IResponse<any>>;
     };
 };
+export * from '../../common/webclient';
