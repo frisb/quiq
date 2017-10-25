@@ -31,7 +31,7 @@ export function HeaderValidator(...fieldNames: string[]): any {
 		public use(req: Request, res: Response, next?: NextFunction): any {
 			let { headers, method } = req;
 
-			validate('header', method, headers, fieldNames);
+			validate('header', method, headers, fieldNames.map((header) => header.toLowerCase()));
 
 			next();
 		}

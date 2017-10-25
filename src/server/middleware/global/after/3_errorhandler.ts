@@ -31,7 +31,7 @@ export class ErrorHandler implements ExpressErrorMiddlewareInterface {
 			method: method.toLocaleUpperCase(),
 			headers,
 			body,
-			error
+			stack
 		});
 
 		if (env !== 'production') {
