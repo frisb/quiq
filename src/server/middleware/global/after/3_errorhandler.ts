@@ -4,32 +4,42 @@ import { Middleware, ExpressErrorMiddlewareInterface } from 'routing-controllers
 import { Request, Response, NextFunction } from 'express';
 import { Writeln } from 'writeln';
 
+interface IErrorResponse {
+	error: {
+		code: number;
+		message: string;
+		stack?: string;
+	}
+}
+
 const logger = new Writeln('Error Handler Middleware');
 const env = process.env.NODE_ENV || 'dev';
 
-@Middleware({ type: 'after' })
+@Middleware({ type: 'after', priority: 3 })
 export class ErrorHandler implements ExpressErrorMiddlewareInterface {
 	public error(error: any, req: Request, res: Response, next: NextFunction) {
+		let { method, headers, body } = req;
 		let { httpCode, message, stack } = error;
-		let payload = {
+		let response: IErrorResponse = {
 			error: {
 				code: httpCode,
-				message,
-				stack: {}
+				message
 			}
 		};
 
 		logger.error(message, {
-			error,
-			payload: req.body
+			method: method.toLocaleUpperCase(),
+			headers,
+			body,
+			error
 		});
 
 		if (env !== 'production') {
 			// errorhandler()(error, req, res, next);
 
-			payload.error.stack = stack;
+			response.error.stack = stack;
 		}
 
-		res.status(httpCode || 500).json(payload);
+		res.status(httpCode || 500).json(response);
 	}
 }
