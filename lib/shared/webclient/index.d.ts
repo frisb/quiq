@@ -1,4 +1,4 @@
-import { RequestFunction, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from './contracts';
+import { RequestFunction, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from './contracts/index';
 import { AuthToken } from './auth/token';
 export * from './contracts';
 export { AuthToken };

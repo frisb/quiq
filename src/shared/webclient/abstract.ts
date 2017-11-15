@@ -1,4 +1,4 @@
-import { IRequestOptions, IResponse, RequestFunction } from './contracts';
+import { IRequestOptions, IResponse, RequestFunction } from './contracts/index';
 
 export function AbstractWebClient(request: RequestFunction) {
 	return class AbstractWebClient {

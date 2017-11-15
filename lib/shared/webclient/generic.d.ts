@@ -1,4 +1,4 @@
-import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse } from './contracts';
+import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse } from './contracts/index';
 export declare function WebClient(request: RequestFunction): {
     new (userAgent?: string): {
         get(url: string, headers?: IRequestHeaders): Promise<IResponse<any>>;

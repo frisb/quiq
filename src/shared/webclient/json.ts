@@ -1,4 +1,4 @@
-import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IJsonWebClient } from './contracts';
+import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IJsonWebClient } from './contracts/index';
 import { AbstractWebClient } from './abstract';
 
 export function JsonWebClient(request: RequestFunction) {
