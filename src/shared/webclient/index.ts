@@ -4,7 +4,7 @@ import { JsonWebClient } from './json';
 import { AuthWebClient } from './auth/index';
 import { AuthToken } from './auth/token';
 
-export * from './contracts';
+export * from './contracts/index';
 export { AuthToken }
 
 export function WebClientFactory(request: RequestFunction, AuthTokenClass?: { new(): AuthToken }) {

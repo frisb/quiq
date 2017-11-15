@@ -1,6 +1,5 @@
-import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse } from '../contracts';
+import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IWrappedToken } from '../contracts/index';
 import { AuthToken } from './token';
-import { IWrappedToken } from '../contracts';
 export declare function AuthWebClient<TAuthToken extends AuthToken>(request: RequestFunction, TokenClass: {
     new (): TAuthToken;
 }): {

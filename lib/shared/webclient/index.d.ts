@@ -1,6 +1,6 @@
 import { RequestFunction, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from './contracts/index';
 import { AuthToken } from './auth/token';
-export * from './contracts';
+export * from './contracts/index';
 export { AuthToken };
 export declare function WebClientFactory(request: RequestFunction, AuthTokenClass?: {
     new (): AuthToken;

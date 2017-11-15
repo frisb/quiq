@@ -1,4 +1,4 @@
-import { IWrappedToken } from '../contracts';
+import { IWrappedToken } from '../contracts/index';
 
 export abstract class AuthToken {
 	public access: string = null;

@@ -1,4 +1,4 @@
-import { IWrappedToken } from '../contracts';
+import { IWrappedToken } from '../contracts/index';
 export declare abstract class AuthToken {
     access: string;
     expires: Date;
