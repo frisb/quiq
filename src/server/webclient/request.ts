@@ -3,7 +3,7 @@ import * as https from 'https';
 import * as _ from 'lodash';
 
 import { Writeln } from 'writeln';
-import { urlParser, IRequestOptions, IResponse } from '../../common';
+import { urlParser, IRequestOptions, IResponse } from '../../shared';
 
 const logger = new Writeln('Web Client');
 

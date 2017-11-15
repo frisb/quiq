@@ -1,7 +1,7 @@
-import { WebClientFactory, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from '../../common';
+import { WebClientFactory, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from '../../shared';
 import { Token } from './token';
 import { request } from './request';
 
 export const { WebClient, JsonWebClient, AuthWebClient } = WebClientFactory(request, Token);
-export * from '../../common/webclient';
+export * from '../../shared/webclient';
 

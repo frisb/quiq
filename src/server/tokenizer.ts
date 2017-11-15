@@ -2,7 +2,7 @@ import { HttpError } from 'routing-controllers';
 import { sign, verify, JsonWebTokenError } from 'jsonwebtoken';
 import { Writeln } from 'writeln';
 import { ISigningOptions } from './contracts';
-import { IWrappedToken } from '../common/';
+import { IWrappedToken } from '../shared/';
 
 const logger = new Writeln('Tokenizer');
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"IRequestOptions.js","sourceRoot":"","sources":["../../../../src/shared/webclient/contracts/IRequestOptions.ts"],"names":[],"mappings":"","sourcesContent":["export interface IRequestOptions {\n\turl: string;\n\tmethod: string;\n\theaders?: { [key: string]: any };\n\tbody?: any;\n}\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"file":"RequestFunction.js","sourceRoot":"","sources":["../../../../src/common/webclient/contracts/RequestFunction.ts"],"names":[],"mappings":"","sourcesContent":["import { IResponse } from './IResponse';\nimport { IRequestOptions } from './IRequestOptions';\n\nexport type RequestFunction = (options: IRequestOptions) => Promise<IResponse<any>>\n"]}

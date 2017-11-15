@@ -1,0 +1,1 @@
+{"version":3,"file":"IResponse.js","sourceRoot":"","sources":["../../../../src/shared/webclient/contracts/IResponse.ts"],"names":[],"mappings":"","sourcesContent":["export interface IResponse<T> {\n\tcode: number;\n\tdata: T;\n}\n"]}

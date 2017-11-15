@@ -1,8 +1,8 @@
 import { PersistentTransport }  from './persistent';
 import { AuthWebClient } from '../webclient';
 import { ITokenizedTransportOptions } from '../contracts';
-import { IWrappedToken, IAuthWebClient } from '../../common';
-import { AuthToken } from '../../common/webclient/auth/token';
+import { IWrappedToken, IAuthWebClient } from '../../shared';
+import { AuthToken } from '../../shared/webclient/auth/token';
 
 export class TokenizedTransport extends PersistentTransport {
 	private tokenAddress: string;
@@ -19,7 +19,7 @@ export class TokenizedTransport extends PersistentTransport {
     this.webClient = new AuthWebClient(userAgent);
   }
 
-  public async connect(): Promise<{}> {
+  public async connect(): Promise<void> {
 		try {
 			let { access_token } = await this.preflite();
 

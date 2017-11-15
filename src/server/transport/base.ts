@@ -22,8 +22,8 @@ export class BaseTransport extends EventEmitter {
     return this.socket === null ? State.UNINITIALIZED : this.socket.readyState;
   }
 
-  public async connect(address?: string): Promise<{}> {
-    return new Promise((resolve, reject) => {
+  public async connect(address = this.address): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       if (this.socket === null) {
         logger.info(`Connecting to ${address} ...`);
 

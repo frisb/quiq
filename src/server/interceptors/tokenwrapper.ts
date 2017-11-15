@@ -2,7 +2,7 @@ import { InterceptorInterface, Action } from 'routing-controllers';
 import { IRequest, ISigningOptions } from '../contracts';
 import { Tokenizer } from '../tokenizer';
 import { Writeln } from 'writeln';
-import { IWrappedToken } from '../../common';
+import { IWrappedToken } from '../../shared';
 
 const logger = new Writeln('Token Wrapper Interceptor');
 

@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { AuthToken } from '../../common/webclient';
+import { AuthToken } from '../../shared/webclient';
 
 export class Token extends AuthToken {
 	constructor() {
