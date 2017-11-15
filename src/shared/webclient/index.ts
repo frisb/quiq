@@ -1,7 +1,7 @@
 import { RequestFunction, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken } from './contracts/index';
 import { WebClient } from './generic';
 import { JsonWebClient } from './json';
-import { AuthWebClient } from './auth';
+import { AuthWebClient } from './auth/index';
 import { AuthToken } from './auth/token';
 
 export * from './contracts';
