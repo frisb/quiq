@@ -1,7 +1,7 @@
 import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IJsonWebClient } from './contracts/index';
 import { AbstractWebClient } from './abstract';
 
-export function JsonWebClient(request: RequestFunction) {
+export function JsonWebClient(request: RequestFunction): { new(userAgent?: string): IJsonWebClient } {
 	async function jsonRequest<T>(options: IRequestOptions): Promise<IResponse<T>> {
 		if (!options.headers)
 			options.headers = {};

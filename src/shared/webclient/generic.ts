@@ -1,7 +1,8 @@
 import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IWebClient } from './contracts/index';
 import { AbstractWebClient } from './abstract';
+export { IWebClient };
 
-export function WebClient(request: RequestFunction) {
+export function WebClient(request: RequestFunction): { new(userAgent?: string): IWebClient } {
 	return class WebClient extends AbstractWebClient(request) implements IWebClient {
 		public async get(url: string, headers?: IRequestHeaders) {
 			return await this.request({ method: 'GET', url, headers });

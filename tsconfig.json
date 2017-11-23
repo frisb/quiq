@@ -13,6 +13,9 @@
     "target": "es2015",
     "watch": true
   },
+  "typeAcquisition": {
+    "enable": true
+  },
   "exclude": [
     "node_modules"
   ]

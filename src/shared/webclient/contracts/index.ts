@@ -6,3 +6,4 @@ export * from './IWebClient';
 export * from './IJsonWebClient';
 export * from './IAuthWebClient';
 export * from './RequestFunction';
+export * from './IWeb';

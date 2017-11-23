@@ -2,7 +2,9 @@ import { IRequestHeaders, RequestFunction, IRequestOptions, IResponse, IAuthWebC
 import { JsonWebClient } from '../json';
 import { AuthToken } from './token';
 
-export function AuthWebClient<TAuthToken extends AuthToken>(request: RequestFunction, TokenClass: { new(): TAuthToken }) {
+export { IAuthWebClient }
+
+export function AuthWebClient<TAuthToken extends AuthToken>(request: RequestFunction, TokenClass: { new(): TAuthToken }): { new(userAgent?: string): IAuthWebClient<TAuthToken> } {
 	return class AuthWebClient extends JsonWebClient(request) implements IAuthWebClient<TAuthToken> {
 		public token = new TokenClass();
 
