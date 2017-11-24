@@ -5,5 +5,6 @@ export * from './IWrappedToken';
 export * from './IWebClient';
 export * from './IJsonWebClient';
 export * from './IAuthWebClient';
+export * from './IAuthToken';
 export * from './RequestFunction';
 export * from './IWeb';

@@ -1,5 +1,5 @@
-import { IWrappedToken } from '../contracts/index';
-export declare abstract class AuthToken {
+import { IWrappedToken, IAuthToken } from '../contracts/index';
+export declare abstract class AuthToken implements IAuthToken {
     access: string;
     expires: Date;
     private expiryTimeoutID;

@@ -1,6 +1,6 @@
-import { IWrappedToken } from '../contracts/index';
+import { IWrappedToken, IAuthToken } from '../contracts/index';
 
-export abstract class AuthToken {
+export abstract class AuthToken implements IAuthToken {
 	public access: string = null;
 	public expires: Date = null;
 
@@ -10,7 +10,7 @@ export abstract class AuthToken {
 		this.startCountdown();
 	}
 
-	get isValid() {
+	public get isValid() {
 		return this.access !== null && this.expires >= new Date();
 	}
 
