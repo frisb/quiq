@@ -4,7 +4,7 @@ export abstract class AuthToken implements IAuthToken {
 	public access: string = null;
 	public expires: Date = null;
 
-	private expiryTimeoutID: any = null;
+	protected expiryTimeoutID: NodeJS.Timer = null;
 
 	constructor() {
 		this.startCountdown();

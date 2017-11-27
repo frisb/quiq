@@ -2,12 +2,12 @@ import { PersistentTransport }  from './persistent';
 import { AuthWebClient } from '../webclient';
 import { ITokenizedTransportOptions } from '../contracts';
 import { IWrappedToken, IAuthWebClient } from '../../shared';
-import { AuthToken } from '../../shared/webclient/auth/token';
+import { Token } from '../webclient/token';
 
 export class TokenizedTransport extends PersistentTransport {
 	private tokenAddress: string;
 	private tokenPayload: any;
-  private webClient: IAuthWebClient<AuthToken>;
+  private webClient: IAuthWebClient<Token>;
 
 	constructor(options: ITokenizedTransportOptions) {
     super(options);

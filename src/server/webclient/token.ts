@@ -1,11 +1,7 @@
 import { EventEmitter } from 'events';
-import { AuthToken } from '../../shared/webclient';
+import { AuthToken } from '../../shared/webclient/auth/token';
 
 export class Token extends AuthToken {
-	constructor() {
-		super();
-	}
-
 	protected emit(event: string | symbol, ...args: Array<any>): boolean {
 		return EventEmitter.prototype.emit.call(this, event, ...args);
 	}

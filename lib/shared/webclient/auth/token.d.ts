@@ -1,8 +1,9 @@
+/// <reference types="node" />
 import { IWrappedToken, IAuthToken } from '../contracts/index';
 export declare abstract class AuthToken implements IAuthToken {
     access: string;
     expires: Date;
-    private expiryTimeoutID;
+    protected expiryTimeoutID: NodeJS.Timer;
     constructor();
     readonly isValid: boolean;
     refresh({access_token, expires_in}: IWrappedToken): void;

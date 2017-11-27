@@ -1,4 +1,4 @@
-import { WebClientFactory, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken, IWebClient, IJsonWebClient, IAuthWebClient, AuthToken } from '../../shared';
+import { WebClientFactory, IRequestOptions, IRequestHeaders, IResponse, IWrappedToken, IWebClient, IJsonWebClient, IAuthWebClient, IAuthToken, AuthToken } from '../../shared';
 import { Token } from './token';
 import { request } from './request';
 
