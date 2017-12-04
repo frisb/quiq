@@ -1,7 +1,7 @@
 {
   "name": "quiq",
   "description": "Simple controller based authoritative web & websocket servers and clients",
-  "version": "2.0.22",
+  "version": "2.0.23",
   "contributors": [
     {
       "name": "Ash Brener",
@@ -38,18 +38,18 @@
     "@types/serve-favicon": "^2.2.29",
     "@types/ws": "^3.2.0",
     "body-parser": "^1.18.2",
-    "chalk": "^2.1.0",
-    "compression": "^1.7.0",
+    "chalk": "^2.3.0",
+    "compression": "^1.7.1",
     "errorhandler": "^1.5.0",
-    "express": "^4.15.5",
-    "ipaddr.js": "^1.5.2",
-    "jsonwebtoken": "^8.0.1",
+    "express": "^4.16.2",
+    "ipaddr.js": "^1.5.4",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
-    "morgan": "^1.8.2",
+    "morgan": "^1.9.0",
     "reflect-metadata": "^0.1.10",
-    "routing-controllers": "^0.7.3",
+    "routing-controllers": "^0.7.6",
     "serve-favicon": "^2.4.5",
-    "source-map-support": "^0.4.18",
+    "source-map-support": "^0.5.0",
     "writeln": "^1.0.1",
     "ws": "^3.3.2"
   }

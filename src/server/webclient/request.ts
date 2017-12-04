@@ -16,14 +16,12 @@ export function request({ url, method, headers, body }: IRequestOptions): Promis
 
 		path += query || '';
 
-
-		if (!headers)
-			headers = {};
-
-		headers['User-Agent'] = this.userAgent;
-
 		if (body) {
 			sData = JSON.stringify(body);
+
+			if (!headers)
+				headers = {};
+
 			headers['Content-Length'] = sData ? Buffer.byteLength(sData) : 0
 		}
 
