@@ -1,13 +1,14 @@
 import { IWSSocket, IClient, ISession, IEnvelope, Message } from '../contracts';
 import { AbstractConnection } from './connection';
 import { Writeln } from 'writeln';
+import { IncomingMessage } from 'http';
 
 const logger = new Writeln('Client');
 
 export abstract class AbstractClient<TSession extends ISession>
 extends AbstractConnection<TSession>
 implements IClient {
-  public constructor (public socket: IWSSocket) {
+  public constructor (public socket: IWSSocket, request: IncomingMessage) {
     super();
 
     socket
@@ -48,7 +49,7 @@ implements IClient {
         this.emit('close', code, message);
       });
 
-    logger.debug('upgrade request url', socket.upgradeReq.url);
+    logger.debug('upgrade request url', request.url);
   }
 
   public get isInitialized() {

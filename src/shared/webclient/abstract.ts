@@ -5,11 +5,6 @@ export function AbstractWebClient(request: RequestFunction) {
 		constructor(public userAgent?: string) {}
 
 		public request(options: IRequestOptions) {
-			if (!options.headers)
-				options.headers = {};
-
-			options.headers['User-Agent'] = this.userAgent;
-
 			return request(options);
 		}
 	}

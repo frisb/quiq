@@ -17,7 +17,7 @@ export declare abstract class AbstractServer<TSession extends ISession, TClient 
         new (client: TClient, gateway: TGateway): TSession;
     };
     protected abstract getClientClass(protocol: string): {
-        new (socket: IWSSocket): TClient;
+        new (socket: IWSSocket, request: IncomingMessage): TClient;
     };
     protected abstract getGatewayClass(protocol: string): {
         new (): TGateway;

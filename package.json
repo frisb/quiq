@@ -1,7 +1,7 @@
 {
   "name": "quiq",
   "description": "Simple controller based authoritative web & websocket servers and clients",
-  "version": "2.0.20",
+  "version": "2.0.22",
   "contributors": [
     {
       "name": "Ash Brener",
@@ -25,7 +25,7 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-ts": "^6.0.0-beta.11",
     "mocha": "^3.4.2",
-    "typescript": "^2.5.3"
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "@types/body-parser": "^1.16.5",
@@ -51,6 +51,6 @@
     "serve-favicon": "^2.4.5",
     "source-map-support": "^0.4.18",
     "writeln": "^1.0.1",
-    "ws": "^3.2.0"
+    "ws": "^3.3.2"
   }
 }

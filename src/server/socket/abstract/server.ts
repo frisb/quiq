@@ -88,8 +88,7 @@ extends WebSocket.Server {
 		if (signing)
 			this.tokenizer = new Tokenizer(signing);
 
-		this.on('connection', (...args: any[]): void => {
-			let socket: IWSSocket = args[0];
+		this.on('connection', (socket: IWSSocket, request: IncomingMessage): void => {
 			let { protocol, tokenData } = socket;
 
 			let SessionType = this.getSessionClass(protocol);
@@ -97,7 +96,7 @@ extends WebSocket.Server {
 			let GatewayType = this.getGatewayClass(protocol);
 
 			let session: TSession;
-			let client = new ClientType(socket);
+			let client = new ClientType(socket, request);
 
 			if (tokenData && tokenData.sessionID) {
 				session = <any> AbstractServer.getSession(tokenData.sessionID);
@@ -136,10 +135,10 @@ extends WebSocket.Server {
 	public async handleUpgrade(request: IncomingMessage, socket: Socket, upgradeHead: Buffer, callback: (cws: WebSocket) => void) {
 		let clientSocket = await this.baseUpgrade(request, socket, upgradeHead);
 
-		let { url } = request;
+		let { url, headers } = request;
 		let { remoteAddress, localPort } = socket;
 		let ipv4 = process(remoteAddress).toString();
-		let channelHost = clientSocket.upgradeReq.headers.host;
+		let channelHost = <string> headers.host;
 
 		if (channelHost.indexOf(':') < 0)
 			channelHost += `:${ localPort }`;
@@ -177,7 +176,7 @@ extends WebSocket.Server {
 
 	protected abstract getSessionClass(protocol: string): { new(client: TClient, gateway: TGateway): TSession };
 
-	protected abstract getClientClass(protocol: string): { new(socket: IWSSocket): TClient };
+	protected abstract getClientClass(protocol: string): { new(socket: IWSSocket, request: IncomingMessage): TClient };
 
 	protected abstract getGatewayClass(protocol: string): { new(): TGateway };
 
