@@ -16,5 +16,5 @@ export declare abstract class AbstractSession<TSession extends AbstractSession<T
     gateway: TGateway;
     constructor(client: TClient, gateway?: TGateway);
     end(code?: number, message?: string): void;
-    readonly abstract backgroundMins: number;
+    abstract readonly backgroundMins: number;
 }

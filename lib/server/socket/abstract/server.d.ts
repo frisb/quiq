@@ -1,4 +1,3 @@
-/// <reference types="ws" />
 /// <reference types="node" />
 import * as WebSocket from 'ws';
 import { IncomingMessage } from 'http';
@@ -22,5 +21,5 @@ export declare abstract class AbstractServer<TSession extends ISession, TClient 
     protected abstract getGatewayClass(protocol: string): {
         new (): TGateway;
     };
-    private baseUpgrade(request, socket, upgradeHead);
+    private baseUpgrade;
 }

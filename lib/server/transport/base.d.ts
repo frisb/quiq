@@ -6,7 +6,7 @@ export declare class BaseTransport extends EventEmitter {
     protected address: string;
     private socket;
     private protocol;
-    constructor({address, protocol}: IBaseTransportOptions);
+    constructor({ address, protocol }: IBaseTransportOptions);
     readonly state: State;
     connect(address?: string): Promise<void>;
     disconnect(): void;

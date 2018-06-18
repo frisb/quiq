@@ -6,5 +6,5 @@ export declare class TokenizedTransport extends PersistentTransport {
     private webClient;
     constructor(options: ITokenizedTransportOptions);
     connect(): Promise<void>;
-    private preflite();
+    private preflite;
 }

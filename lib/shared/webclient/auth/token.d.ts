@@ -6,9 +6,9 @@ export declare abstract class AuthToken implements IAuthToken {
     protected expiryTimeoutID: NodeJS.Timer;
     constructor();
     readonly isValid: boolean;
-    refresh({access_token, expires_in}: IWrappedToken): void;
+    refresh({ access_token, expires_in }: IWrappedToken): void;
     protected abstract emit(event: string | symbol, ...args: Array<any>): boolean;
     protected abstract on(event: string | symbol, listener: Function): this;
-    private stopCountdown();
-    private startCountdown();
+    private stopCountdown;
+    private startCountdown;
 }

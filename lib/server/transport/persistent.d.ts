@@ -7,5 +7,5 @@ export declare class PersistentTransport extends BaseTransport {
     constructor(options: IPersistentTransportOptions);
     disconnect(mustReconnect?: boolean): void;
     send(message: any): void;
-    private reconnect();
+    private reconnect;
 }

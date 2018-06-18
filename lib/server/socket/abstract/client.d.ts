@@ -12,5 +12,5 @@ export declare abstract class AbstractClient<TSession extends ISession> extends 
     abstract parseEnvelope(payload: string): IEnvelope<any>;
     abstract parseMessage(envelope: IEnvelope<any>): Message<any>;
     abstract getEventName(message: any): string;
-    private sendSync(payload);
+    private sendSync;
 }
