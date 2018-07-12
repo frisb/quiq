@@ -27,34 +27,41 @@ export class BaseTransport extends EventEmitter {
       if (this.socket === null) {
         logger.info(`Connecting to ${address} ...`);
 
-        let ws = new WebSocket(address || this.address, [this.protocol]);
+        try {
+	        let ws = new WebSocket(address || this.address, [this.protocol]);
 
-        ws.on('open', () => {
-          logger.info('connected');
-          this.emit('connected');
-          resolve();
-        });
+	        ws.on('open', () => {
+		        logger.info('connected');
+		        this.emit('connected');
+		        resolve();
+	        });
 
-        ws.on('close', () => {
-          logger.info('disconnected');
-          this.emit('disconnected');
-          this.socket = null;
-        });
+	        ws.on('close', () => {
+		        logger.info('disconnected');
+		        this.emit('disconnected');
+		        this.socket = null;
+	        });
 
-        ws.on('error', (err) => {
-          this.emit('error', err);
-          logger.warn('error', err);
+	        ws.on('error', (err) => {
+		        this.emit('error', err);
+		        logger.warn('error', err);
+
+		        reject(err);
+	        });
+
+	        ws.on('message', (data: string) => {
+		        let obj = JSON.parse(data);
+		        logger.debug('< Received', obj);
+		        this.emit('message', obj);
+	        });
+
+	        this.socket = ws;
+        }
+        catch (err) {
+	        logger.error(`Connection failure to ${address} ...`);
 
           reject(err);
-        });
-
-        ws.on('message', (data: string) => {
-          let obj = JSON.parse(data);
-          logger.debug('< Received', obj);
-          this.emit('message', obj);
-        });
-
-        this.socket = ws;
+        }
       }
       else if (this.state === State.OPEN) {
         resolve();

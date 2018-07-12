@@ -77,13 +77,13 @@ export class Tokenizer {
 				else {
 					let { ip, origin } = data;
 
-					if (ip !== remoteIP) {
-						reject(new IpAddressError());
-					}
-					else if (origin !== channelOrigin) {
-						reject(new HostError());
-					}
-					else {
+					// if (ip !== remoteIP) {
+					// 	reject(new IpAddressError());
+					// }
+					// else if (origin !== channelOrigin) {
+					// 	reject(new HostError());
+					// }
+					// else {
 						let tokenData: any = {};
 
 						for (let key in data) {
@@ -92,7 +92,7 @@ export class Tokenizer {
 						}
 
 						resolve(tokenData);
-					}
+					// }
 				}
 			});
 		});
