@@ -72,9 +72,14 @@ export class BaseTransport extends EventEmitter {
 
   public send(message: string) {
     if (this.state === State.OPEN) {
-      this.socket.send(message);
-      logger.info('> Sent', message);
-      this.emit('sent', message);
+      try {
+	      this.socket.send(message);
+	      logger.info('> Sent', message);
+	      this.emit('sent', message);
+      }
+      catch (err) {
+        logger.error(err.message, err.stack);
+      }
     }
     else {
       this.emit('error', 'send connectivity');
