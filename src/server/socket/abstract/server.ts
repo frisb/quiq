@@ -11,31 +11,66 @@ import { AbstractSession } from './session';
 
 const logger = new Writeln('WebSocket Server');
 
+// /**
+//  * Close the connection when preconditions are not fulfilled.
+//  *
+//  * @param {net.Socket} socket The socket of the upgrade request
+//  * @param {Number} code The HTTP response status code
+//  * @param {String} [message] The HTTP response body
+//  * @private
+//  */
+// function abortConnection (socket: Socket, code: number, message: string, err?: Error) {
+// 	if (socket.writable) {
+// 		message = message || STATUS_CODES[code];
+// 		socket.write(
+// 			`HTTP/1.1 ${ code } ${ STATUS_CODES[code] }\r\n` +
+// 			'Connection: close\r\n' +
+// 			'Content-type: text/html\r\n' +
+// 			`Content-Length: ${ Buffer.byteLength(message) }\r\n` +
+// 			'\r\n' +
+// 			message
+// 		);
+// 	}
+//
+// 	socket.destroy();
+//
+// 	logger.error(`${ code } ${ message }`, err);
+// }
+
+
 /**
  * Close the connection when preconditions are not fulfilled.
  *
  * @param {net.Socket} socket The socket of the upgrade request
  * @param {Number} code The HTTP response status code
  * @param {String} [message] The HTTP response body
+ * @param {Object} [headers] Additional HTTP response headers
  * @private
  */
-function abortConnection (socket: Socket, code: number, message: string, err?: Error) {
+function abortHandshake (socket: Socket, code: number, message?: string, headers?: any) {
 	if (socket.writable) {
 		message = message || STATUS_CODES[code];
+		headers = Object.assign({
+			'Connection': 'close',
+			'Content-type': 'text/html',
+			'Content-Length': Buffer.byteLength(message)
+		}, headers);
+
 		socket.write(
-			`HTTP/1.1 ${ code } ${ STATUS_CODES[code] }\r\n` +
-			'Connection: close\r\n' +
-			'Content-type: text/html\r\n' +
-			`Content-Length: ${ Buffer.byteLength(message) }\r\n` +
-			'\r\n' +
+			`HTTP/1.1 ${code} ${STATUS_CODES[code]}\r\n` +
+			Object.keys(headers).map(h => `${h}: ${headers[h]}`).join('\r\n') +
+			'\r\n\r\n' +
 			message
 		);
 	}
 
+	socket.removeAllListeners('error');
 	socket.destroy();
 
-	logger.error(`${ code } ${ message }`, err);
+	logger.error(`${ code } ${ message }`);
 }
+
+
 
 // export function protocol<TClient extends Client<ISession>>(test: string) {
 // 	return function<TServer extends Server<ISession, TClient, Gateway<ISession>>>(target: TServer) {
@@ -125,7 +160,7 @@ extends WebSocket.Server {
 						// remove from dictionary
 						// session = null;
 
-						// abortConnection(socket, code, reason);
+						// abortHandshake(socket, code, reason);
 						client.close();
 					});
 			}
@@ -162,7 +197,7 @@ extends WebSocket.Server {
 				}
 			}
 			catch (err) {
-				abortConnection(socket, err.httpCode, err.message, err);
+				abortHandshake(socket, err.httpCode, err.message);
 			}
 		}
 		else {
