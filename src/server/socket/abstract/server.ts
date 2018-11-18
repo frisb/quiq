@@ -1,9 +1,8 @@
 import * as WebSocket from 'ws';
-import { IncomingMessage, STATUS_CODES } from 'http';
-import { Socket } from 'net';
+import { IncomingMessage } from 'http';
 import { process } from 'ipaddr.js';
 import { Writeln } from 'writeln';
-import { IWSServerOptions, IWSSocket, ISession } from '../contracts';
+import { IWSServerOptions, IWSSocket, ISession, IIncomingMessage } from '../contracts';
 import { Tokenizer, NoTokenError } from '../../tokenizer';
 import { AbstractClient } from './client';
 import { AbstractGateway } from './gateway';
@@ -11,99 +10,10 @@ import { AbstractSession } from './session';
 
 const logger = new Writeln('WebSocket Server');
 
-// /**
-//  * Close the connection when preconditions are not fulfilled.
-//  *
-//  * @param {net.Socket} socket The socket of the upgrade request
-//  * @param {Number} code The HTTP response status code
-//  * @param {String} [message] The HTTP response body
-//  * @private
-//  */
-// function abortConnection (socket: Socket, code: number, message: string, err?: Error) {
-// 	if (socket.writable) {
-// 		message = message || STATUS_CODES[code];
-// 		socket.write(
-// 			`HTTP/1.1 ${ code } ${ STATUS_CODES[code] }\r\n` +
-// 			'Connection: close\r\n' +
-// 			'Content-type: text/html\r\n' +
-// 			`Content-Length: ${ Buffer.byteLength(message) }\r\n` +
-// 			'\r\n' +
-// 			message
-// 		);
-// 	}
-//
-// 	socket.destroy();
-//
-// 	logger.error(`${ code } ${ message }`, err);
-// }
+interface IX { origin: string; secure: boolean; req: IncomingMessage }
+type T = (res: boolean, code?: number, message?: string) => void;
 
-
-/**
- * Close the connection when preconditions are not fulfilled.
- *
- * @param {net.Socket} socket The socket of the upgrade request
- * @param {Number} code The HTTP response status code
- * @param {String} [message] The HTTP response body
- * @param {Object} [headers] Additional HTTP response headers
- * @private
- */
-function abortHandshake (socket: Socket, code: number, message?: string, headers?: any) {
-	if (socket.writable) {
-		message = message || STATUS_CODES[code];
-		headers = Object.assign({
-			'Connection': 'close',
-			'Content-type': 'text/html',
-			'Content-Length': Buffer.byteLength(message)
-		}, headers);
-
-		socket.write(
-			`HTTP/1.1 ${code} ${STATUS_CODES[code]}\r\n` +
-			Object.keys(headers).map(h => `${h}: ${headers[h]}`).join('\r\n') +
-			'\r\n\r\n' +
-			message
-		);
-	}
-
-	socket.removeAllListeners('error');
-	socket.destroy();
-
-	logger.error(`${ code } ${ message }`);
-}
-
-
-
-// export function protocol<TClient extends Client<ISession>>(test: string) {
-// 	return function<TServer extends Server<ISession, TClient, Gateway<ISession>>>(target: TServer) {
-//     // save a reference to the original constructor
-// 		const original = target;
-
-// 		// a utility function to generate instances of a class
-// 		function construct(constructor: TServer, args: any) {
-// 			function c(): void {
-// 				return (<any> constructor).apply(this, args);
-// 			}
-
-// 			c.prototype = (<any> constructor).prototype;
-
-// 			return new (<any> c)();
-// 		}
-
-// 		// the new constructor behaviour
-// 		function f(...args: Array<any>) {
-// 			console.log("New: " + (<any> original).name);
-// 			return construct(original, args);
-// 		}
-
-// 		// copy prototype so intanceof operator still works
-// 		f.prototype = (<any> original).prototype;
-
-// 		// return new constructor (will override original)
-// 		return f;
-// 	};
-// }
-
-export abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>>
-extends WebSocket.Server {
+export abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>> {
 
 	/**
 	 * Get session
@@ -116,22 +26,23 @@ extends WebSocket.Server {
 	private tokenizer: Tokenizer = null;
 
 	public constructor(options: IWSServerOptions) {
-		super(options);
+		const wsServer = new WebSocket.Server(Object.assign(options, { verifyClient: options.verifyClient || this.verifyClient.bind(this) }));
 
-		let { signing } = options;
+		const { signing } = options;
 
 		if (signing)
 			this.tokenizer = new Tokenizer(signing);
 
-		this.on('connection', (socket: IWSSocket, request: IncomingMessage): void => {
-			let { protocol, tokenData } = socket;
+		wsServer.on('connection', (socket: IWSSocket, request: IIncomingMessage): void => {
+			const { protocol } = socket;
+			const { tokenData } = request;
 
-			let SessionType = this.getSessionClass(protocol);
-			let ClientType = this.getClientClass(protocol);
-			let GatewayType = this.getGatewayClass(protocol);
+			const SessionType = this.getSessionClass(protocol);
+			const ClientType = this.getClientClass(protocol);
+			const GatewayType = this.getGatewayClass(protocol);
 
 			let session: TSession;
-			let client = new ClientType(socket, request);
+			const client = new ClientType(socket, request);
 
 			if (tokenData && tokenData.sessionID) {
 				session = <any> AbstractServer.getSession(tokenData.sessionID);
@@ -167,44 +78,6 @@ extends WebSocket.Server {
 		});
 	}
 
-	public async handleUpgrade(request: IncomingMessage, socket: Socket, upgradeHead: Buffer, callback: (cws: WebSocket) => void) {
-		let clientSocket = await this.baseUpgrade(request, socket, upgradeHead);
-
-		let { url, headers } = request;
-		let { remoteAddress, localPort } = socket;
-		let ipv4 = process(remoteAddress).toString();
-		let channelHost = <string> headers.host;
-
-		if (channelHost.indexOf(':') < 0)
-			channelHost += `:${ localPort }`;
-
-		if (ipv4 === '::1')
-			ipv4 = '127.0.0.1';
-
-		if (this.useTokens(clientSocket.protocol)) {
-			try {
-				if (url.length > 20) {
-					let token = url.substr(1);
-					let tokenData = await this.tokenizer.unwrap(ipv4, channelHost, token);
-
-					clientSocket.tokenData = tokenData;
-					clientSocket.ipv4 = ipv4;
-
-					callback(clientSocket);
-				}
-				else {
-					throw new NoTokenError();
-				}
-			}
-			catch (err) {
-				abortHandshake(socket, err.httpCode, err.message);
-			}
-		}
-		else {
-			callback(clientSocket);
-		}
-	}
-
 	protected useTokens(protocol: string): boolean {
 		return this.tokenizer !== null;
 	}
@@ -215,7 +88,39 @@ extends WebSocket.Server {
 
 	protected abstract getGatewayClass(protocol: string): { new(): TGateway };
 
-	private baseUpgrade(request: IncomingMessage, socket: Socket, upgradeHead: Buffer): Promise<any> {
-		return new Promise((resolve) => super.handleUpgrade(request, socket, upgradeHead, resolve));
+	private async verifyClient(info: IX, callback: T) {
+		const req = info.req as IIncomingMessage;
+		const { url, headers, socket: { remoteAddress, localPort } } = req;
+
+		let ipv4 = process(remoteAddress).toString();
+		let channelHost = <string> headers.host;
+
+		if (channelHost.indexOf(':') < 0)
+			channelHost += `:${ localPort }`;
+
+		if (ipv4 === '::1')
+			ipv4 = '127.0.0.1';
+
+		if (this.useTokens(headers['sec-websocket-protocol'] as string)) {
+			// try {
+				if (url.length > 20) {
+					const token = url.substr(1);
+
+					req.tokenData = await this.tokenizer.unwrap(ipv4, channelHost, token);
+					req.ipv4 = ipv4;
+
+					callback(true);
+				}
+				else {
+					throw new NoTokenError();
+				}
+			// }
+			// catch (err) {
+			// 	callback(false, err.httpCode, err.message);
+			// }
+		}
+		else {
+			callback(true);
+		}
 	}
 }

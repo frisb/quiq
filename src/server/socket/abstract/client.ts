@@ -1,14 +1,13 @@
-import { IWSSocket, IClient, ISession, IEnvelope, Message } from '../contracts';
+import { IWSSocket, IClient, ISession, IEnvelope, Message, IIncomingMessage } from '../contracts';
 import { AbstractConnection } from './connection';
 import { Writeln } from 'writeln';
-import { IncomingMessage } from 'http';
 
 const logger = new Writeln('Client');
 
 export abstract class AbstractClient<TSession extends ISession>
 extends AbstractConnection<TSession>
 implements IClient {
-  public constructor (public socket: IWSSocket, request: IncomingMessage) {
+  public constructor (public socket: IWSSocket, protected request: IIncomingMessage) {
     super();
 
     socket
