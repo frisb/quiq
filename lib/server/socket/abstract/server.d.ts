@@ -4,8 +4,8 @@ import { IWSServerOptions, IWSSocket, ISession } from '../contracts';
 import { AbstractClient } from './client';
 import { AbstractGateway } from './gateway';
 import { AbstractSession } from './session';
-export declare abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>> {
-    static getSession<S extends AbstractSession<S, C, G>, C extends AbstractClient<S>, G extends AbstractGateway<S>>(id: string): S;
+export declare abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession, any>, TGateway extends AbstractGateway<TSession>> {
+    static getSession<S extends AbstractSession<S, C, G>, C extends AbstractClient<S, any>, G extends AbstractGateway<S>>(id: string): S;
     private tokenizer;
     constructor(options: IWSServerOptions);
     protected useTokens(protocol: string): boolean;

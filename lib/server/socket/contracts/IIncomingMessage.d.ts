@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import { IncomingMessage } from 'http';
-export interface IIncomingMessage extends IncomingMessage {
-    tokenData: any;
+export interface IIncomingMessage<TTokenData> extends IncomingMessage {
+    tokenData: TTokenData;
     ipv4: string;
+    protocol: string;
 }

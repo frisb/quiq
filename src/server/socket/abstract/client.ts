@@ -4,10 +4,10 @@ import { Writeln } from 'writeln';
 
 const logger = new Writeln('Client');
 
-export abstract class AbstractClient<TSession extends ISession>
+export abstract class AbstractClient<TSession extends ISession, TTokenData extends any>
 extends AbstractConnection<TSession>
 implements IClient {
-  public constructor (public socket: IWSSocket, protected request: IIncomingMessage) {
+  public constructor (public socket: IWSSocket, protected request: IIncomingMessage<TTokenData>) {
     super();
 
     socket

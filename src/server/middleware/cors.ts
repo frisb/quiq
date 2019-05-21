@@ -9,7 +9,7 @@ export class CORS implements ExpressMiddlewareInterface {
 		if (origin)
 			res.set('Access-Control-Allow-Origin', <string> origin);
 
-		if (method === 'OPTIONS') {
+		if (method === 'OPTIONS' || method === 'GET') {
 			res.set({
 				'Access-Control-Allow-Methods': '*',
 				'Access-Control-Allow-Headers': headers['access-control-request-headers']

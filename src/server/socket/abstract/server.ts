@@ -13,13 +13,13 @@ const logger = new Writeln('WebSocket Server');
 interface IX { origin: string; secure: boolean; req: IncomingMessage }
 type T = (res: boolean, code?: number, message?: string) => void;
 
-export abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>> {
+export abstract class AbstractServer<TSession extends ISession, TClient extends AbstractClient<TSession, any>, TGateway extends AbstractGateway<TSession>> {
 
 	/**
 	 * Get session
 	 * @param {string} id
 	 */
-	public static getSession<S extends AbstractSession<S, C, G>, C extends AbstractClient<S>, G extends AbstractGateway<S>>(id: string): S {
+	public static getSession<S extends AbstractSession<S, C, G>, C extends AbstractClient<S, any>, G extends AbstractGateway<S>>(id: string): S {
 		return <S> AbstractSession.get<S, C, G>(id);
 	}
 
@@ -33,9 +33,8 @@ export abstract class AbstractServer<TSession extends ISession, TClient extends 
 		if (signing)
 			this.tokenizer = new Tokenizer(signing);
 
-		wsServer.on('connection', (socket: IWSSocket, request: IIncomingMessage): void => {
-			const { protocol } = socket;
-			const { tokenData } = request;
+		wsServer.on('connection', (socket: IWSSocket, request: IIncomingMessage<any>): void => {
+			const { tokenData, protocol } = request;
 
 			const SessionType = this.getSessionClass(protocol);
 			const ClientType = this.getClientClass(protocol);
@@ -89,11 +88,17 @@ export abstract class AbstractServer<TSession extends ISession, TClient extends 
 	protected abstract getGatewayClass(protocol: string): { new(): TGateway };
 
 	private async verifyClient(info: IX, callback: T) {
-		const req = info.req as IIncomingMessage;
-		const { url, headers, socket: { remoteAddress, localPort } } = req;
+		const req = info.req as IIncomingMessage<any>;
+		const {
+			url,
+			headers: { host, ['sec-websocket-protocol']: protocol },
+			socket: { remoteAddress, localPort }
+		} = req;
+
+		req.protocol = protocol as string;
 
 		let ipv4 = process(remoteAddress).toString();
-		let channelHost = <string> headers.host;
+		let channelHost = host;
 
 		if (channelHost.indexOf(':') < 0)
 			channelHost += `:${ localPort }`;
@@ -101,7 +106,7 @@ export abstract class AbstractServer<TSession extends ISession, TClient extends 
 		if (ipv4 === '::1')
 			ipv4 = '127.0.0.1';
 
-		if (this.useTokens(headers['sec-websocket-protocol'] as string)) {
+		if (this.useTokens(req.protocol)) {
 			// try {
 				if (url.length > 20) {
 					const token = url.substr(1);

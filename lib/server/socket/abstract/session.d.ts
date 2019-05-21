@@ -3,9 +3,9 @@ import { EventEmitter } from 'events';
 import { ISession } from '../contracts';
 import { AbstractClient } from './client';
 import { AbstractGateway } from './gateway';
-export declare abstract class AbstractSession<TSession extends AbstractSession<TSession, TClient, TGateway>, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>> extends EventEmitter implements ISession {
+export declare abstract class AbstractSession<TSession extends AbstractSession<TSession, TClient, TGateway>, TClient extends AbstractClient<TSession, any>, TGateway extends AbstractGateway<TSession>> extends EventEmitter implements ISession {
     static add(session: ISession): void;
-    static get<S extends AbstractSession<S, C, G>, C extends AbstractClient<S>, G extends AbstractGateway<S>>(id: string): AbstractSession<S, C, G>;
+    static get<S extends AbstractSession<S, C, G>, C extends AbstractClient<S, any>, G extends AbstractGateway<S>>(id: string): AbstractSession<S, C, G>;
     static remove(id: string): void;
     private static cache;
     ID: string;

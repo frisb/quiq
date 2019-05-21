@@ -1,9 +1,9 @@
 import { IWSSocket, IClient, ISession, IEnvelope, Message, IIncomingMessage } from '../contracts';
 import { AbstractConnection } from './connection';
-export declare abstract class AbstractClient<TSession extends ISession> extends AbstractConnection<TSession> implements IClient {
+export declare abstract class AbstractClient<TSession extends ISession, TTokenData extends any> extends AbstractConnection<TSession> implements IClient {
     socket: IWSSocket;
-    protected request: IIncomingMessage;
-    constructor(socket: IWSSocket, request: IIncomingMessage);
+    protected request: IIncomingMessage<TTokenData>;
+    constructor(socket: IWSSocket, request: IIncomingMessage<TTokenData>);
     readonly isInitialized: boolean;
     close(): void;
     send(payloadOrPromise: any): Promise<{}>;

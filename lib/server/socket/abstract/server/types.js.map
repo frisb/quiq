@@ -1,1 +1,0 @@
-{"version":3,"file":"types.js","sourceRoot":"","sources":["../../../../../src/server/socket/abstract/server/types.ts"],"names":[],"mappings":";;AAAA,IAAY,WAGX;AAHD,WAAY,WAAW;IACtB,yCAAE,CAAA;IACF,uDAAS,CAAA;AACV,CAAC,EAHW,WAAW,GAAX,mBAAW,KAAX,mBAAW,QAGtB","sourcesContent":["export enum serverTypes {\n\tWS,\n\tSOCKET_IO\n}\n"]}

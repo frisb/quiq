@@ -4,14 +4,14 @@ import { AbstractClient } from './client';
 import { AbstractGateway } from './gateway';
 import { generateID } from '../../idgenerator';
 
-export abstract class AbstractSession<TSession extends AbstractSession<TSession, TClient, TGateway>, TClient extends AbstractClient<TSession>, TGateway extends AbstractGateway<TSession>>
+export abstract class AbstractSession<TSession extends AbstractSession<TSession, TClient, TGateway>, TClient extends AbstractClient<TSession, any>, TGateway extends AbstractGateway<TSession>>
 extends EventEmitter
 implements ISession {
 	public static add(session: ISession): void {
 		this.cache[session.ID] = session;
 	}
 
-	public static get<S extends AbstractSession<S, C, G>, C extends AbstractClient<S>, G extends AbstractGateway<S>>(id: string): AbstractSession<S, C, G> {
+	public static get<S extends AbstractSession<S, C, G>, C extends AbstractClient<S, any>, G extends AbstractGateway<S>>(id: string): AbstractSession<S, C, G> {
 		return <S> this.cache[id];
 	}
 
