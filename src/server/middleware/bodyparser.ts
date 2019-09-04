@@ -11,6 +11,6 @@ export class JsonBodyParser implements ExpressMiddlewareInterface {
 
 export class UrlEncodedBodyParser implements ExpressMiddlewareInterface {
 	public use(req: Request, res: Response, next?: NextFunction): any {
-		urlencoded()(req, res, next);
+		urlencoded({ extended: true })(req, res, next);
 	}
 }

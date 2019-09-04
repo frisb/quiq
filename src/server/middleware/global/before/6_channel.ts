@@ -11,7 +11,7 @@ import { JsonBodyParser } from '../../bodyparser';
 const logger = new Writeln('Channel Middleware');
 
 @Middleware({ type: 'before', priority: 6 })
-@UseBefore(JsonBodyParser)
+// @UseBefore(JsonBodyParser)
 export class Channel implements ExpressMiddlewareInterface {
 	public async use(req: IRequest, res: Response, next: NextFunction): Promise<void> {
 		await parseBody(req, res);
@@ -66,7 +66,7 @@ async function parseBody(req: IRequest, res: Response): Promise<{}> {
 				break;
 
 			case 'application/x-www-form-urlencoded':
-				urlencoded()(req, res, resolve);
+				urlencoded({ extended: true })(req, res, resolve);
 				break;
 
 			default:
