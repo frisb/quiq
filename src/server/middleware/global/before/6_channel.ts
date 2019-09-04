@@ -58,15 +58,27 @@ export class Channel implements ExpressMiddlewareInterface {
 	}
 }
 
+/*
+ * Parse application/x-www-form-urlencoded && application/json
+ * Use body-parser's `verify` callback to export a parsed raw body
+ * that you need to use to verify the signature
+ */
+
+const rawBodyBuffer = (req: IRequest, res: Response, buf: Buffer, encoding: string) => {
+	if (buf && buf.length) {
+		req.rawBody = buf.toString(encoding || 'utf8');
+	}
+};
+
 async function parseBody(req: IRequest, res: Response): Promise<{}> {
 	return new Promise(function (resolve) {
 		switch (req.header('content-type')) {
 			case 'application/json':
-				json()(req, res, resolve);
+				json({ verify: rawBodyBuffer })(req, res, resolve);
 				break;
 
 			case 'application/x-www-form-urlencoded':
-				urlencoded({ extended: true })(req, res, resolve);
+				urlencoded({ verify: rawBodyBuffer, extended: true })(req, res, resolve);
 				break;
 
 			default:

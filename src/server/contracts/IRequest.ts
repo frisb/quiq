@@ -6,4 +6,5 @@ export interface IRequest extends Request {
 	tokenData: any;
 	authorizationBearer?: string;
 	intercept?: any;
+	rawBody: string;
 }
