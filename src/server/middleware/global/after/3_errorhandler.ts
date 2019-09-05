@@ -15,7 +15,7 @@ interface IErrorResponse {
 const logger = new Writeln('Error Handler Middleware');
 const env = process.env.NODE_ENV || 'dev';
 
-@Middleware({ type: 'after', priority: 3 })
+@Middleware({ type: 'after', priority: 10 })
 export class ErrorHandler implements ExpressErrorMiddlewareInterface {
 	public error(error: any, req: Request, res: Response, next: NextFunction) {
 		let { method, headers, body } = req;

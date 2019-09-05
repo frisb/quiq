@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from 'express';
 const filePath = `${ process.cwd() }/public/favicon.ico`;
 const hasFavicon = existsSync(filePath);
 
-@Middleware({ type: 'before', priority: 4 })
+@Middleware({ type: 'before', priority: 20 })
 export class ServeFavicon implements ExpressMiddlewareInterface {
 	public use(req: Request, res: Response, next?: NextFunction): any {
 		if (hasFavicon) {

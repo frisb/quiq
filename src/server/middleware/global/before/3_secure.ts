@@ -1,7 +1,7 @@
 import { Middleware, ExpressMiddlewareInterface } from 'routing-controllers';
 import { Request, Response, NextFunction } from 'express';
 
-@Middleware({ type: 'before', priority: 3 })
+@Middleware({ type: 'before', priority: 30 })
 export class Secure implements ExpressMiddlewareInterface {
 	public use(req: Request, res: Response, next?: NextFunction): any {
 		let { path, protocol, hostname, url } = req;

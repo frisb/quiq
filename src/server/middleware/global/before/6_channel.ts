@@ -10,7 +10,7 @@ import { JsonBodyParser } from '../../bodyparser';
 
 const logger = new Writeln('Channel Middleware');
 
-@Middleware({ type: 'before', priority: 6 })
+@Middleware({ type: 'before', priority: 0 })
 // @UseBefore(JsonBodyParser)
 export class Channel implements ExpressMiddlewareInterface {
 	public async use(req: IRequest, res: Response, next: NextFunction): Promise<void> {
