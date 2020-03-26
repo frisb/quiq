@@ -8,5 +8,5 @@ export declare abstract class AbstractConnection<TSession extends ISession> exte
     close(): void;
     abstract onInit(): void;
     abstract onClosed(): void;
-    abstract readonly isInitialized: boolean;
+    abstract get isInitialized(): boolean;
 }

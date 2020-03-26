@@ -27,7 +27,7 @@ export class Channel implements ExpressMiddlewareInterface {
 		if (ipv4 === '::1')
 			ipv4 = '127.0.0.1';
 
-		let key = chalk.default.gray.dim(`${ipv4}-${ID}`);
+		let key = chalk.gray.dim(`${ipv4}-${ID}`);
 
 		req.ID = ID;
 		req.ipv4 = ipv4;

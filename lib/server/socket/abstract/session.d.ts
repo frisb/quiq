@@ -12,9 +12,11 @@ export declare abstract class AbstractSession<TSession extends AbstractSession<T
     private _client;
     private _gateway;
     private _backgroundTimerID;
-    client: TClient;
-    gateway: TGateway;
+    get client(): TClient;
+    set client(val: TClient);
+    get gateway(): TGateway;
+    set gateway(val: TGateway);
     constructor(client: TClient, gateway?: TGateway);
     end(code?: number, message?: string): void;
-    abstract readonly backgroundMins: number;
+    abstract get backgroundMins(): number;
 }

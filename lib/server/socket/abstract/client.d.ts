@@ -4,7 +4,7 @@ export declare abstract class AbstractClient<TSession extends ISession, TTokenDa
     socket: IWSSocket;
     protected request: IIncomingMessage<TTokenData>;
     constructor(socket: IWSSocket, request: IIncomingMessage<TTokenData>);
-    readonly isInitialized: boolean;
+    get isInitialized(): boolean;
     close(): void;
     send(payloadOrPromise: any): Promise<{}>;
     error(code: number, message: string, error?: Error): void;

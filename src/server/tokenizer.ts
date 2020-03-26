@@ -1,5 +1,5 @@
 import { HttpError } from 'routing-controllers';
-import { sign, verify, JsonWebTokenError } from 'jsonwebtoken';
+import { sign, verify, JsonWebTokenError, SignOptions, VerifyOptions } from 'jsonwebtoken';
 import { Writeln } from 'writeln';
 import { ISigningOptions } from './contracts';
 import { IWrappedToken } from '../shared/';
@@ -37,7 +37,7 @@ export class Tokenizer {
 
 	public wrap(remoteIP: string, channelOrigin: string, data: any, include?: string[]): IWrappedToken {
 		let { expirySeconds, secret, algorithm } = this.signing;
-		let options = { expiresIn: expirySeconds, algorithm };
+		let options = { expiresIn: expirySeconds, algorithm } as SignOptions;
 
 		data.ip = remoteIP;
 		data.origin = channelOrigin;
@@ -68,7 +68,7 @@ export class Tokenizer {
 
 		return new Promise(function (resolve, reject) {
 			let algorithms = [algorithm];
-			let options = { algorithms };
+			let options = { algorithms } as VerifyOptions;
 
 			verify(token, secret, options, function (err: JsonWebTokenError, data: any) {
 				if (err) {
