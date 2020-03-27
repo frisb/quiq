@@ -10,11 +10,18 @@ export class CORS implements ExpressMiddlewareInterface {
 			res.set('Access-Control-Allow-Origin', <string> origin);
 
 		if (method === 'OPTIONS' || method === 'GET') {
-			res.set({
-				'Access-Control-Allow-Methods': '*',
-				'Access-Control-Allow-Headers': headers['access-control-request-headers']
-			});
+			const accessControlHeaders = {
+				'Access-Control-Allow-Credentials': 'true',
+				'Access-Control-Allow-Methods': '*'
+			} as any;
 
+			if (headers['access-control-request-headers'])
+				accessControlHeaders['Access-Control-Allow-Headers'] = headers['access-control-request-headers'];
+
+			res.set(accessControlHeaders);
+		}
+
+		if (method === 'OPTIONS') {
 			res.end();
 		}
 		else {
