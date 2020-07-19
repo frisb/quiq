@@ -27,7 +27,7 @@ export function create(options: RoutingControllersOptions): express.Application 
 	// if (!options.interceptors)
 	// 	options.interceptors = [];
 
-	(options.middlewares as Array<any>).unshift([
+	(options.middlewares as Array<any>).unshift(
 		Morgan,
 		UserAgent,
 		Secure,
@@ -39,7 +39,7 @@ export function create(options: RoutingControllersOptions): express.Application 
 		StaticPublic,
 		ErrorHandler,
 		Final
-	]);
+	);
 	// (<Array<string | Function>> options.controllers).unshift(`${ __dirname }/../channel/controllers/global**/*.js`);
 	// (<Array<string | Function>> options.controllers).unshift(`${ __dirname }/../channel/global/interceptors/**/*.js`);
 	options.defaultErrorHandler = false;
