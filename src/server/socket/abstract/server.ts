@@ -1,14 +1,14 @@
 import * as WebSocket from 'ws';
 import { IncomingMessage } from 'http';
 import { process } from 'ipaddr.js';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { IWSServerOptions, IWSSocket, ISession, IIncomingMessage } from '../contracts';
 import { Tokenizer, NoTokenError } from '../../tokenizer';
 import { AbstractClient } from './client';
 import { AbstractGateway } from './gateway';
 import { AbstractSession } from './session';
 
-const logger = new Writeln('WebSocket Server');
+const logger = new Logger('WebSocket Server');
 
 interface IX { origin: string; secure: boolean; req: IncomingMessage }
 type T = (res: boolean, code?: number, message?: string) => void;

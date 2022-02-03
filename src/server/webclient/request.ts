@@ -2,10 +2,10 @@ import * as http from 'http';
 import * as https from 'https';
 import * as _ from 'lodash';
 
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { urlParser, IRequestOptions, IResponse } from '../../shared';
 
-const logger = new Writeln('Web Client');
+const logger = new Logger('Web Client');
 
 export function request({ url, method, headers, body }: IRequestOptions): Promise<IResponse<string>> {
 	return new Promise((resolve, reject) => {

@@ -1,9 +1,9 @@
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { BaseTransport }  from './base';
 import { State }  from './state';
 import { IPersistentTransportOptions } from '../contracts';
 
-const logger = new Writeln('Persistent Transport');
+const logger = new Logger('Persistent Transport');
 
 export class PersistentTransport extends BaseTransport {
 	private retryInterval: number;

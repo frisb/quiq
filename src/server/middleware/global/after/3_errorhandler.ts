@@ -2,7 +2,7 @@
 
 import { Middleware, ExpressErrorMiddlewareInterface } from 'routing-controllers';
 import { Request, Response, NextFunction } from 'express';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 
 interface IErrorResponse {
 	error: {
@@ -12,7 +12,7 @@ interface IErrorResponse {
 	}
 }
 
-const logger = new Writeln('Error Handler Middleware');
+const logger = new Logger('Error Handler Middleware');
 const env = process.env.NODE_ENV || 'dev';
 
 @Middleware({ type: 'after', priority: 10 })

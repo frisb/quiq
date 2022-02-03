@@ -1,10 +1,10 @@
 import * as http from 'http';
 import * as https from 'https';
 import { Application } from 'express';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import ErrnoException = NodeJS.ErrnoException;
 
-const logger = new Writeln('Server Factory');
+const logger = new Logger('Server Factory');
 
 export function create(app: Application, port: number | string, secureServerOptions?: https.ServerOptions): http.Server | https.Server {
 	port = normalizePort(port);

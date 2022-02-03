@@ -1,10 +1,10 @@
 import * as WebSocket from 'ws';
 import { EventEmitter } from 'events';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { State } from './state';
 import { IBaseTransportOptions } from '../contracts';
 
-const logger = new Writeln('Transport');
+const logger = new Logger('Transport');
 
 export class BaseTransport extends EventEmitter {
 	protected address: string;

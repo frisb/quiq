@@ -1,10 +1,10 @@
 import { HttpError } from 'routing-controllers';
 import { sign, verify, JsonWebTokenError, SignOptions, VerifyOptions } from 'jsonwebtoken';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { ISigningOptions } from './contracts';
 import { IWrappedToken } from '../shared/';
 
-const logger = new Writeln('Tokenizer');
+const logger = new Logger('Tokenizer');
 
 export class IpAddressError extends HttpError {
 	constructor() {

@@ -1,8 +1,8 @@
 import { ExpressMiddlewareInterface, HttpError } from 'routing-controllers';
 import { Request, Response, NextFunction } from 'express';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 
-const logger = new Writeln('Request Validator');
+const logger = new Logger('Request Validator');
 
 interface ICollection {
 	[key: string]: any;

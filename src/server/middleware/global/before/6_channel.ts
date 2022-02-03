@@ -3,12 +3,12 @@ import { Middleware, ExpressMiddlewareInterface, UseBefore } from 'routing-contr
 import { Response, NextFunction } from 'express';
 import { process } from 'ipaddr.js';
 import { generateID } from '../../../idgenerator';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { json, urlencoded } from 'body-parser';
 import { IRequest } from '../../../contracts';
 import { JsonBodyParser } from '../../bodyparser';
 
-const logger = new Writeln('Channel Middleware');
+const logger = new Logger('Channel Middleware');
 
 @Middleware({ type: 'before', priority: 0 })
 // @UseBefore(JsonBodyParser)

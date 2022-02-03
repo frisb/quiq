@@ -1,10 +1,10 @@
 import { InterceptorInterface, Action } from 'routing-controllers';
 import { IRequest, ISigningOptions } from '../contracts';
 import { Tokenizer } from '../tokenizer';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { IWrappedToken } from '../../shared';
 
-const logger = new Writeln('Token Wrapper Interceptor');
+const logger = new Logger('Token Wrapper Interceptor');
 
 export function TokenWrapper(signing: ISigningOptions, ...fieldNames: string[]): any {
 	const tokenizer = new Tokenizer(signing);

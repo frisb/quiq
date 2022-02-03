@@ -10,11 +10,6 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/chalk@^0.4.31":
-  version "0.4.31"
-  resolved "https://registry.yarnpkg.com/@types/chalk/-/chalk-0.4.31.tgz#a31d74241a6b1edbb973cf36d97a2896834a51f9"
-  integrity sha1-ox10JBprHtu5c8822XooloNKUfk=
-
 "@types/chalk@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@types/chalk/-/chalk-2.2.0.tgz#b7f6e446f4511029ee8e3f43075fb5b73fbaa0ba"
@@ -40,11 +35,6 @@
   integrity sha512-2+FrkXY4zllzTNfJth7jOqEHC+enpLeGslEhpnTAkg21GkRrWV4SsAtqchtT4YS9/nODBU2/ZfsBY2X4J/dX7A==
   dependencies:
     "@types/node" "*"
-
-"@types/debug@0.0.30":
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
-  integrity sha512-orGL5LXERPYsLov6CWs3Fh6203+dXzJkR7OnddIr2514Hsecwc8xRpzCapshBbKFImCsvS/mk6+FWiN5LyZJAQ==
 
 "@types/express-serve-static-core@*":
   version "4.17.3"
@@ -91,11 +81,6 @@
   version "12.12.31"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.31.tgz#d6b4f9645fee17f11319b508fb1001797425da51"
   integrity sha512-T+wnJno8uh27G9c+1T+a1/WYCHzLeDqtsGJkoEdSp2X8RTh3oOCZQcUnjAx90CS8cmmADX51O0FI/tu9s0yssg==
-
-"@types/node@^8.0.31":
-  version "8.10.59"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.59.tgz#9e34261f30183f9777017a13d185dfac6b899e04"
-  integrity sha512-8RkBivJrDCyPpBXhVZcjh7cQxVBSmRk9QM7hOketZzp6Tg79c0N8kkpAIito9bnJ3HCVCHVYz+KHTEbfQNfeVQ==
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -409,7 +394,7 @@ chalk@*:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^2.1.0, chalk@^2.4.2, chalk@~2.4.1:
+chalk@^2.4.2, chalk@~2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -622,12 +607,12 @@ debug@3.2.6:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
+debug@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
+  integrity sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
   dependencies:
-    ms "^2.1.1"
+    ms "2.1.2"
 
 decamelize@^1.2.0:
   version "1.2.0"
@@ -2885,17 +2870,12 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
-writeln@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/writeln/-/writeln-1.0.4.tgz#719dbc43d49f9f55b95df6e55defb2f504e97a98"
-  integrity sha512-l/8sqD8GiDjhQNbASDp1mhpXmYWxIs+3jyTuln72yAPiJImiLgxS1Kc8fCJKNB3u+Ba0uVkMmDEWvMDSdahGsg==
+writeln@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/writeln/-/writeln-2.0.5.tgz#7ddeac2223b8f6366a102bd389ddb5f0b0c016c4"
+  integrity sha512-wxEMSThoYZY507CeyTaUNV3OQe5zNk5LeTwCIsNtUZJAn25KqQQzB+YmqqhPGU/uqkhfWACStpzYLZzbekPQ3g==
   dependencies:
-    "@types/chalk" "^0.4.31"
-    "@types/debug" "0.0.30"
-    "@types/node" "^8.0.31"
-    chalk "^2.1.0"
-    debug "^4.0.1"
-    lodash "^4.17.4"
+    debug "^4.3.3"
 
 ws@^7.3.1:
   version "7.3.1"

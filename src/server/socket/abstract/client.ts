@@ -1,8 +1,8 @@
 import { IWSSocket, IClient, ISession, IEnvelope, Message, IIncomingMessage } from '../contracts';
 import { AbstractConnection } from './connection';
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 
-const logger = new Writeln('Client');
+const logger = new Logger('Client');
 
 export abstract class AbstractClient<TSession extends ISession, TTokenData extends any>
 extends AbstractConnection<TSession>

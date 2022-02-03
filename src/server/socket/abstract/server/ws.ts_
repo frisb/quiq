@@ -1,6 +1,6 @@
 import * as WebSocket from 'ws';
 import { process } from 'ipaddr.js'
-import { Writeln } from 'writeln';
+import { Logger } from 'writeln';
 import { IncomingMessage } from 'http';
 import { IIncomingMessage, ISession, IWSServerOptions, IWSSocket } from '../../contracts';
 import { AbstractClient } from '../client';
@@ -8,7 +8,7 @@ import { AbstractGateway } from '../gateway';
 import { AbstractSession } from '../session';
 import { NoTokenError, Tokenizer } from '../../../tokenizer';
 
-const logger = new Writeln('WebSocket Server');
+const logger = new Logger('WebSocket Server');
 
 interface IX { origin: string; secure: boolean; req: IncomingMessage }
 type T = (res: boolean, code?: number, message?: string) => void;
