@@ -1,6 +1,7 @@
 import { Middleware, ExpressMiddlewareInterface, UseBefore } from 'routing-controllers';
 import { Response, NextFunction } from 'express';
-import { process } from 'ipaddr.js';
+import chalk from 'chalk';
+import { parse } from 'ipaddr.js';
 import { generateID } from '../../../idgenerator';
 import { Logger } from 'writeln';
 import { json, urlencoded } from 'body-parser';
@@ -21,14 +22,12 @@ export class Channel implements ExpressMiddlewareInterface {
 		authorization = <string> authorization;
 
 		let ID = generateID();
-		let ipv4 = process(req.ip).toString(); // x-forwarded-for ?
+		let ipv4 = parse(req.ip).toString(); // x-forwarded-for ?
 
 		if (ipv4 === '::1')
 			ipv4 = '127.0.0.1';
 
-		const chalk = await import('chalk')
-
-		let key = chalk.default.gray.dim(`${ipv4}-${ID}`);
+		let key = chalk.gray.dim(`${ipv4}-${ID}`);
 
 		req.ID = ID;
 		req.ipv4 = ipv4;
