@@ -28,7 +28,7 @@ export class TokenInvalidError extends HttpError {
 	constructor(err: Error) {
 		super(498, 'Token expired/invalid');
 
-		logger.error(err.message, err);
+		logger.error(`${ err.message } %o`, err);
 	}
 }
 

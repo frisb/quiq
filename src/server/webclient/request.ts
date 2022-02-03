@@ -1,6 +1,6 @@
-import * as http from 'http';
-import * as https from 'https';
-import * as _ from 'lodash';
+import http from 'http';
+import https from 'https';
+import _ from 'lodash';
 
 import { Logger } from 'writeln';
 import { urlParser, IRequestOptions, IResponse } from '../../shared';
@@ -35,7 +35,7 @@ export function request({ url, method, headers, body }: IRequestOptions): Promis
 
 		let client = isSSL ? https : http;
 
-		logger.debug('request', _.extend(options, { body: body || '' }));
+		logger.debug('request %o', _.extend(options, { body: body || '' }));
 
 		let req = (<any> client).request(options, function (res: http.IncomingMessage): void {
 			let data = '';
@@ -53,14 +53,14 @@ export function request({ url, method, headers, body }: IRequestOptions): Promis
 					data
 				};
 
-				logger.debug('response', response);
+				logger.debug('response %o', response);
 
 				resolve(response);
 			});
 		});
 
 		req.on('error', function (e: Error) {
-			logger.error('Error', e);
+			logger.error('Error %o', e);
 
 			reject(e);
 		});

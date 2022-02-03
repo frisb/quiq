@@ -1,4 +1,3 @@
-import * as chalk from 'chalk';
 import { Middleware, ExpressMiddlewareInterface, UseBefore } from 'routing-controllers';
 import { Response, NextFunction } from 'express';
 import { process } from 'ipaddr.js';
@@ -27,7 +26,9 @@ export class Channel implements ExpressMiddlewareInterface {
 		if (ipv4 === '::1')
 			ipv4 = '127.0.0.1';
 
-		let key = chalk.gray.dim(`${ipv4}-${ID}`);
+		const chalk = await import('chalk')
+
+		let key = chalk.default.gray.dim(`${ipv4}-${ID}`);
 
 		req.ID = ID;
 		req.ipv4 = ipv4;
@@ -50,7 +51,7 @@ export class Channel implements ExpressMiddlewareInterface {
 			if (metadata && res.getHeader('content-type') === 'application/json')
 				metadata = JSON.parse(metadata);
 
-			logger.debug(`${ key } < ${ res.statusCode }`, metadata);
+			logger.debug(`${ key } < ${ res.statusCode } %o`, metadata);
 			return send.apply(res, arguments);
 		};
 
@@ -70,7 +71,7 @@ const rawBodyBuffer = (req: IRequest, res: Response, buf: Buffer, encoding: stri
 	}
 };
 
-async function parseBody(req: IRequest, res: Response): Promise<{}> {
+async function parseBody(req: IRequest, res: Response): Promise<void> {
 	return new Promise(function (resolve) {
 		switch (req.header('content-type')) {
 			case 'application/json':

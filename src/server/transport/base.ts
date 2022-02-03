@@ -1,4 +1,4 @@
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 import { EventEmitter } from 'events';
 import { Logger } from 'writeln';
 import { State } from './state';
@@ -44,14 +44,14 @@ export class BaseTransport extends EventEmitter {
 
 	        ws.on('error', (err) => {
 		        this.emit('error', err);
-		        logger.warn('error', err);
+		        logger.warn('error %o', err);
 
 		        reject(err);
 	        });
 
 	        ws.on('message', (data: string) => {
 		        let obj = JSON.parse(data);
-		        logger.debug('< Received', obj);
+		        logger.debug('< Received %o', obj);
 		        this.emit('message', obj);
 	        });
 
@@ -81,11 +81,11 @@ export class BaseTransport extends EventEmitter {
     if (this.state === State.OPEN) {
       try {
 	      this.socket.send(message);
-	      logger.info('> Sent', message);
+	      logger.info('> Sent %o', message);
 	      this.emit('sent', message);
       }
       catch (err) {
-        logger.error(err.message, err.stack);
+        logger.error(`${ err.message } %o`, err.stack);
       }
     }
     else {

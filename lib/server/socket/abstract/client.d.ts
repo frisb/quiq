@@ -6,7 +6,7 @@ export declare abstract class AbstractClient<TSession extends ISession, TTokenDa
     constructor(socket: IWSSocket, request: IIncomingMessage<TTokenData>);
     get isInitialized(): boolean;
     close(): void;
-    send(payloadOrPromise: any): Promise<{}>;
+    send(payloadOrPromise: any): Promise<void>;
     error(code: number, message: string, error?: Error): void;
     abstract parseEnvelope(payload: string): IEnvelope<any>;
     abstract parseMessage(envelope: IEnvelope<any>): Message<any>;

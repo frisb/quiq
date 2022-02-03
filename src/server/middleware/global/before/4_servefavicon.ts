@@ -1,4 +1,4 @@
-import * as serveFavicon from 'serve-favicon';
+import serveFavicon from 'serve-favicon';
 import { existsSync } from 'fs';
 import { Middleware, ExpressMiddlewareInterface } from 'routing-controllers';
 import { Request, Response, NextFunction } from 'express';

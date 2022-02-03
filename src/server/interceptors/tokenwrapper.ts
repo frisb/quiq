@@ -22,7 +22,7 @@ export function TokenWrapper(signing: ISigningOptions, ...fieldNames: string[]):
 					include.push(name);
 			}
 
-			logger.debug('Wrapping', { payload, include });
+			logger.debug('Wrapping %o', { payload, include });
 
 			return tokenizer.wrap(ipv4, channelOrigin, payload, include);
 		}

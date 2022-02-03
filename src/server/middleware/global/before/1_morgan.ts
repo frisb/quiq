@@ -1,4 +1,4 @@
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 
 import { Middleware, ExpressMiddlewareInterface } from 'routing-controllers';
 import { Response, NextFunction } from 'express';

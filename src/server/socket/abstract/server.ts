@@ -1,4 +1,4 @@
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 import { IncomingMessage } from 'http';
 import { process } from 'ipaddr.js';
 import { Logger } from 'writeln';

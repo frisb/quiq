@@ -12,7 +12,7 @@ implements IClient {
 
     socket
       .on('message', (payload: string) => {
-        logger.debug('payload', payload);
+        logger.debug('payload %o', payload);
 
         try {
           let envelope = this.parseEnvelope(payload);
@@ -22,7 +22,7 @@ implements IClient {
           let handler = this[handlerName];
 
           // let key = chalk.dim(`${ipv4}-${ID}`);
-          // logger.debug(`${ key } > ${ method } ${ url }`, body);
+          // logger.debug(`${ key } > ${ method } ${ url } %o`, body);
 
           if (handler) {
             try {
@@ -48,7 +48,7 @@ implements IClient {
         this.emit('close', code, message);
       });
 
-    logger.debug('upgrade request url', request.url);
+    logger.debug('upgrade request url %o', request.url);
   }
 
   public get isInitialized() {
@@ -64,7 +64,7 @@ implements IClient {
     }
   }
 
-  public async send(payloadOrPromise: any): Promise<{}> {
+  public async send(payloadOrPromise: any): Promise<void> {
     return new Promise((resolve, reject) => {
       try {
         if (payloadOrPromise.then instanceof Function) {
@@ -92,7 +92,7 @@ implements IClient {
       }
     });
 
-		logger.error(`${code} ${message}`, error);
+		logger.error(`${code} ${message} %o`, error);
 	};
 
   public abstract parseEnvelope(payload: string): IEnvelope<any>;
@@ -102,13 +102,13 @@ implements IClient {
   public abstract getEventName(message: any): string;
 
   private sendSync(payload: any): void {
-    logger.debug('send', payload);
+    logger.debug('send %o', payload);
 
     try {
       this.socket.send(JSON.stringify(payload));
     }
     catch (err) {
-      logger.error(err.message, err);
+      logger.error(`${ err.message } %o`, err);
     }
   }
 }

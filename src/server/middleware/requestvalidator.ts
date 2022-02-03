@@ -19,7 +19,7 @@ function validate(type: string, method: string, collection: ICollection, fieldNa
 		let name: string = fieldNames[i];
 
 		if (typeof collection[name] === 'undefined') {
-			logger.error(`Header param "${ name }" not found in ${ type } for ${ method.toUpperCase() } request`, collection);
+			logger.error(`Header param "${ name }" not found in ${ type } for ${ method.toUpperCase() } request %o`, collection);
 
 			throw new RequestValidatorError();
 		}

@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 import { process } from 'ipaddr.js';
 import { Logger } from 'writeln';
 import { IWSServerOptions, IWSSocket, ISession, IIncomingMessage } from '../../contracts';

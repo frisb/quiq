@@ -1,5 +1,5 @@
 import 'reflect-metadata'; // this shim is required
-import * as express from 'express';
+import express from 'express';
 import { useExpressServer, RoutingControllersOptions, ExpressMiddlewareInterface } from 'routing-controllers';
 import { StaticClient } from '../middleware/global/after/1_staticclient';
 import { Morgan } from '../middleware/global/before/1_morgan';
