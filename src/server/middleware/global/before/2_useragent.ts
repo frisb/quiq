@@ -10,7 +10,7 @@ export class UserAgent implements ExpressMiddlewareInterface {
 		// 	next(new HttpError(403, 'Forbidden'));
 		// }
 		// else
-			if (userAgent.toLowerCase() !== 'libwww-perl') {
+		if (!userAgent || userAgent.toLowerCase() !== 'libwww-perl') {
 			next();
 		}
 	}
