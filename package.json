@@ -1,7 +1,7 @@
 {
   "name": "quiq",
   "description": "Simple controller based authoritative web & websocket servers and clients",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "contributors": [
     {
       "name": "Ash Brener",
